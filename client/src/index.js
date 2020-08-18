@@ -1,17 +1,43 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import './custom.scss';
+
+class Recipe extends React.Component {
+  render() {
+    const recipe = {
+      width: "12rem",
+    };
+
+    return (
+      <div className="card" style={recipe}>
+        <div className="card-body">
+          <div className="card-text">Hello World</div>
+        </div>
+      </div>
+    );
+  }
+}
+
+class Container extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      recipes: [],
+    }
+  }
+
+  render() {
+    return (
+      <div className="container-xl">
+        <Recipe />
+      </div>
+    );
+  }
+}
+
+// ========================================
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <Container />,
   document.getElementById('root')
 );
-
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();

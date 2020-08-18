@@ -1,0 +1,34 @@
+// overall theme colors to match brand
+$adw-teal: #007f7f;
+$adw-blue: #18246f;
+$adw-aqua: #0093ce;
+$adw-gray: #7c878e;
+$adw-yellow: #e2d77a;
+$adw-red: #ed471f;
+
+$light: #e5e8e9;
+
+$theme-colors: (
+    "primary": $adw-blue,
+    "secondary": $adw-aqua,
+    "info": $adw-gray,
+    "success": $adw-teal,
+    "danger": $adw-red,
+    "warning": $adw-yellow
+);
+
+// navbar color changes
+$navbar-light-color: $adw-blue;
+$navbar-light-hover-color: rgba($adw-blue, .7);
+$navbar-light-active-color: $adw-teal;
+$navbar-light-disabled-color: rgba($adw-aqua, .3);
+$navbar-light-toggler-icon-bg: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 30 30'><path stroke='#{$navbar-light-color}' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/></svg>") !default;
+$navbar-light-toggler-border-color: rgba($adw-blue, .1);
+
+
+// body definitions for color/font
+$body-color: $adw-blue;
+$font-family-sans-serif: degular-display;
+$font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !default;
+
+@import '../node_modules/bootstrap/scss/bootstrap';
