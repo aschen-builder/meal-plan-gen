@@ -1,26 +1,16 @@
-import React from 'react';
+import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import Recipe from './components/Recipe';
+
 import './custom.scss';
 
-class Recipe extends React.Component {
-  render() {
-    const recipe = {
-      width: "12rem",
-    };
-
-    return (
-      <p className="h2">{this.props.value}</p>
-    );
-  }
-}
-
-class Container extends React.Component {
+class Container extends Component {
   constructor(props) {
     super(props);
     this.state = {
       error: null,
-      isLoaded: false,
-      test: null
+      isFetched: false,
+      recipes: []
     };
   }
 
@@ -28,14 +18,14 @@ class Container extends React.Component {
     fetch('http://localhost:3300/recipes')
       .then(res => res.json())
       .then(
-        (res) => {
+        (json) => {
           this.setState({
-            isLoaded: true,
-            test: res[0].name
+            isFetched: true,
+            recipes: json
           });
         }, (err) => {
           this.setState({
-            isLoaded: true,
+            isFetched: true,
             err
           });
         }
@@ -43,9 +33,15 @@ class Container extends React.Component {
   }
 
   render() {
+    var el = [];
+
+    for(var i = 0; i < this.state.recipes.length; i++) {
+      el.push(<Recipe data={this.state.recipes[i]} fetched={this.state.isFetched} />);
+    }
+
     return (
       <div className="container-xl">
-        <Recipe value={this.state.test}/>
+        {el}
       </div>
     );
   }
