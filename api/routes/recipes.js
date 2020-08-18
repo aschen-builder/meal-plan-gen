@@ -24,7 +24,11 @@ function getData(uri, mdb, col, filters, callback) {
 }
 
 router.get('/', (req, res) => {
-    res.send('API is connected!');
+    console.log(req.body);
+
+    getData(config.uri, config.db, config.collection, {}, (data) => {
+        res.send(data);
+    });
 });
 
 module.exports = router;

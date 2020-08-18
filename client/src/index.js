@@ -9,11 +9,7 @@ class Recipe extends React.Component {
     };
 
     return (
-      <div className="card" style={recipe}>
-        <div className="card-body">
-          <div className="card-text">Hello World</div>
-        </div>
-      </div>
+      <p className="h2">{this.props.value}</p>
     );
   }
 }
@@ -22,14 +18,34 @@ class Container extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      recipes: [],
-    }
+      error: null,
+      isLoaded: false,
+      test: null
+    };
+  }
+
+  componentDidMount() {
+    fetch('http://localhost:3300/recipes')
+      .then(res => res.json())
+      .then(
+        (res) => {
+          this.setState({
+            isLoaded: true,
+            test: res[0].name
+          });
+        }, (err) => {
+          this.setState({
+            isLoaded: true,
+            err
+          });
+        }
+      );
   }
 
   render() {
     return (
       <div className="container-xl">
-        <Recipe />
+        <Recipe value={this.state.test}/>
       </div>
     );
   }
