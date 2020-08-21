@@ -4,7 +4,7 @@ const express = require('express');
 
 const router = express.Router();
 
-function getData(uri, mdb, col, callback) {
+function getIngredients(uri, mdb, col, callback) {
     const mongo = new MongoClient(uri, { useUnifiedTopology: true });
   
     mongo.connect(async (err, res) => {
@@ -24,10 +24,14 @@ function getData(uri, mdb, col, callback) {
 }
 
 router.get('/', (req, res) => {
-    console.log(req.body);
+    getIngredients(config.uri, config.db, config.collection, (data) => {
+        let ings = [];
 
-    getData(config.uri, config.db, config.collection, (data) => {
-        res.send(data);
+        data.forEach(({ingredients}) => ingredients.forEach(({ingredients}) => ingredients.forEach(({name}) => ings.push(name))));
+
+        ings = [ ...new Set(ings) ]
+
+        res.send(ings);
     });
 });
 

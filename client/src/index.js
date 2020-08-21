@@ -11,7 +11,6 @@ class IngredientContainer extends Component {
     this.state = {
       error: null,
       isFetched: false,
-      data: [],
       ingredients: []
     };
   }
@@ -19,32 +18,11 @@ class IngredientContainer extends Component {
   componentDidMount() {
     fetch('http://localhost:3300/ingredients')
       .then(res => res.json())
-      .then(
-        (json) => {
-          this.setState({
-            data: json
-          });
-        }, (err) => {
-          this.setState({
-            isFetched: true,
-            err
-          });
-        }
-      ).then(() => {
-        var arr = [];
-
-        this.state.data.forEach(e => {
-          for(var i = 0; i < e.ingredients.length; i++) {
-            for(var j = 0; j < e.ingredients[i].ingredients.length; j++) {
-              arr.push(e.ingredients[i].ingredients[j].name);
-            }
-          }
-        });
-
+      .then(json => { 
         this.setState({
-          isFetched: true,
-          ingredients: [ ...new Set(this.state.ingredients.concat(arr)) ]
-        });
+          ingredients: json,
+          isFetched: true
+        })
       });
   }
 
